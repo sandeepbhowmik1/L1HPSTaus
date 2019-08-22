@@ -25,7 +25,6 @@ scram b -j 8
 
 git clone https://github.com/sandeepbhowmik1/L1HPSTaus fileToCopy
 
-cd fileToCopy
 
 
 # ----------- place DataFormats -------------------
@@ -82,10 +81,8 @@ cp fileToCopy/L1Trigger/Phase2L1Taus/python/L1HPSPFTauProducerPF_cff.py $CMSSW_B
 cp fileToCopy/L1Trigger/Phase2L1Taus/test/produceL1HPSPFTaus_cfg.py $CMSSW_BASE/src/L1Trigger/Phase2L1Taus/test/
 
 
-cd ../
-
 rm -rf fileToCopy
 
 
-scram b
+scram b -j 8
 
