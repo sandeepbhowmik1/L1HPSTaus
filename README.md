@@ -1,7 +1,7 @@
 # L1HPSTaus
 Developing HPS Tau algorithm for CMS L1 trigger for Phase2
 
-# ---------------- Install CMSSW --------------------------------
+# ------------- Install CMSSW ---------------------
 
 cmsrel CMSSW_10_6_1_patch2
 
@@ -28,7 +28,7 @@ git clone https://github.com/sandeepbhowmik1/L1HPSTaus fileToCopy
 cd fileToCopy
 
 
-# ---------------- place DataFormats --------------------------------
+# ----------- place DataFormats -------------------
 
 cp -r fileToCopy/DataFormats/Phase2L1Taus $CMSSW_BASE/src/DataFormats/
 
@@ -45,7 +45,7 @@ cp fileToCopy/DataFormats/L1TVertex/src/classes.h  $CMSSW_BASE/src/DataFormats/L
 cp fileToCopy/DataFormats/L1TVertex/src/classes_def.xml $CMSSW_BASE/src/DataFormats/L1TVertex/src/
 
 
-# ----------------- place L1Trigger --------------------------------
+# ------------ place L1Trigger --------------------
 
 cp fileToCopy/L1Trigger/Phase2L1Taus/BuildFile.xml $CMSSW_BASE/src/L1Trigger/Phase2L1Taus/
 
