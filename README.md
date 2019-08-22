@@ -36,7 +36,7 @@ git clone https://github.com/sandeepbhowmik1/L1HPSTaus fileToCopy
 
 
 
-# ----------- place DataFormats -------------------
+# ----------- place L1HPSTaus in DataFormats ------------
 
 cp -r fileToCopy/DataFormats/Phase2L1Taus $CMSSW_BASE/src/DataFormats/
 
@@ -53,7 +53,7 @@ cp fileToCopy/DataFormats/L1TVertex/src/classes.h  $CMSSW_BASE/src/DataFormats/L
 cp fileToCopy/DataFormats/L1TVertex/src/classes_def.xml $CMSSW_BASE/src/DataFormats/L1TVertex/src/
 
 
-# ------------ place L1Trigger --------------------
+# ------------ place L1HPSTaus in L1Trigger --------------
 
 cp fileToCopy/L1Trigger/Phase2L1Taus/BuildFile.xml $CMSSW_BASE/src/L1Trigger/Phase2L1Taus/
 
