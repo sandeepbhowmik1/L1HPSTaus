@@ -1,6 +1,15 @@
 # L1HPSTaus
 Developing HPS Tau algorithm for CMS L1 trigger for Phase2
 
+# ------------ To run in Tallinn T2 --------------
+
+singularity exec --home $HOME:/srv --bind /cvmfs --bind /hdfs --bind /home --pwd /srv --contain --ipc --pid /cvmfs/singularity.opensciencegrid.org/bbockelm/cms:rhel7 bash
+
+source /cvmfs/cms.cern.ch/cmsset_default.sh
+
+export SCRAM_ARCH=slc7_amd64_gcc700
+
+
 # ------------- Install CMSSW ---------------------
 
 cmsrel CMSSW_10_6_1_patch2
