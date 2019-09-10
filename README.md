@@ -92,6 +92,7 @@ cp fileToCopy/L1Trigger/Phase2L1Taus/test/produceL1HPSPFTaus_cfg.py $CMSSW_BASE/
 
 rm -rf fileToCopy
 
+rm $CMSSW_BASE/src/L1Trigger/Phase2L1Taus/src/BuildFile.xml
 
 scram b -j 8
 
