@@ -4,4 +4,10 @@
   </class>
   <class name="l1t::L1HPSPFTauCollection"/>
   <class name="edm::Wrapper<l1t::L1HPSPFTauCollection>"/>
+
+  <class name="l1t::L1HPSPFDiTau" ClassVersion="16">
+    <version ClassVersion="16" checksum="1955520953"/>
+  </class>
+  <class name="l1t::L1HPSPFDiTauCollection"/>
+  <class name="edm::Wrapper<l1t::L1HPSPFDiTauCollection>"/> 
 </lcgdict>
