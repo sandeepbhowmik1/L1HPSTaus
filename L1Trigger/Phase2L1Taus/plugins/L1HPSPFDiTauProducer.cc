@@ -5,7 +5,7 @@
 #include <cmath> // std::fabs
 
 L1HPSPFDiTauProducer::L1HPSPFDiTauProducer(const edm::ParameterSet& cfg) 
-  : deltaZ_(cfg.getParameter<double>("deltaZ"))
+  : max_dz_(cfg.getParameter<double>("max_dz"))
   , debug_(cfg.getUntrackedParameter<bool>("debug", false))
 {
 
@@ -25,56 +25,41 @@ void L1HPSPFDiTauProducer::produce(edm::Event& evt, const edm::EventSetup& es)
 
   edm::Handle<l1t::L1HPSPFTauCollection>  l1HPSPFTaus;
   evt.getByToken(tokenL1HPSPFTaus_,     l1HPSPFTaus);
-
+  
   if ( debug_ )
     {
       int nTaus = l1HPSPFTaus->size();
       std::cout << " Number of Taus " << nTaus << std::endl;
     }
-
-  for( l1t::L1HPSPFTauCollection::const_iterator Tau1 = l1HPSPFTaus->begin(); Tau1 != l1HPSPFTaus->end(); Tau1++ )
+  
+  for( size_t idxTau1 = 0; idxTau1 < l1HPSPFTaus->size(); idxTau1++ )
     {
-      if ( debug_ )
+      for( size_t idxTau2 = idxTau1 + 1; idxTau2 < l1HPSPFTaus->size(); idxTau2++ )
 	{
-	  std::cout << " In First Loop " << std::endl;
-	}
+	  edm::Ref<l1t::L1HPSPFTauCollection> leadingTau(l1HPSPFTaus, idxTau1);
+	  edm::Ref<l1t::L1HPSPFTauCollection> subleadingTau(l1HPSPFTaus, idxTau2);
 
-      double z1 = 1000;
-      if ( Tau1->leadChargedPFCand().isNonnull() && Tau1->leadChargedPFCand()->pfTrack().isNonnull())
-	{
-	  z1 = Tau1->leadChargedPFCand()->pfTrack()->vertex().z();
-	}
-
-      bool isDiTau = false;
-      for( l1t::L1HPSPFTauCollection::const_iterator Tau2 = Tau1+1; Tau2 != l1HPSPFTaus->end(); Tau2++ )
-	{
-	  if ( debug_ )
+	  if ( leadingTau->leadChargedPFCand().isNonnull() && leadingTau->leadChargedPFCand()->pfTrack().isNonnull() && subleadingTau->leadChargedPFCand().isNonnull() && subleadingTau->leadChargedPFCand()->pfTrack().isNonnull() ) 
 	    {
-	      std::cout << " In Second Loop " << std::endl;
-	    }
-
-	  double z2 = 2000;
-	  if ( Tau2->leadChargedPFCand().isNonnull() && Tau2->leadChargedPFCand()->pfTrack().isNonnull())
-	    {
-	      z2 = Tau2->leadChargedPFCand()->pfTrack()->vertex().z();
-	    }
-
-	  double dz_ = z1 - z2;
-
-	  if ( std::fabs(dz_) < deltaZ_ )
-	    {
-	      l1t::L1HPSPFDiTau l1HPSPFDiTau_;
-	      l1HPSPFDiTau_.dzBetweenDiTau_ = dz_;
-	      l1HPSPFDiTau_.leadingL1HPSPFTau_ = *Tau1;
-              l1HPSPFDiTau_.subleadingL1HPSPFTau_= *Tau2;
-	      l1HPSPFDiTauCollection->push_back(l1HPSPFDiTau_);
-	      isDiTau = true;
-	      break; // comment to save all possible pair in a event
+	      float z1 = leadingTau->leadChargedPFCand()->pfTrack()->vertex().z();
+	      float z2 = subleadingTau->leadChargedPFCand()->pfTrack()->vertex().z();   
+	      float dz = z1 - z2;
+	      if ( std::fabs(dz) < max_dz_ )
+		{
+		  l1t::L1HPSPFDiTau l1HPSPFDiTau(leadingTau, subleadingTau, dz);
+		  l1HPSPFDiTauCollection->push_back(l1HPSPFDiTau);
+		}
 	    }
 	}
-      if ( isDiTau )
+    }
+
+  if ( debug_ )
+    {
+      std::cout << "AFTER selection : " << std::endl;
+      for ( size_t idx = 0; idx < l1HPSPFDiTauCollection->size(); ++idx )
 	{
-	  break; // comment to save all possible pair in a event
+	  const l1t::L1HPSPFDiTau l1PFTau = l1HPSPFDiTauCollection->at(idx);
+	  std::cout << "L1HPSPFTau # " << idx << " dz_ " << l1PFTau.dz_ << " leadingTau Pt " << l1PFTau.leadingL1HPSPFTau_->pt() << " subleadingTau Pt " << l1PFTau.subleadingL1HPSPFTau_->pt() << std::endl;
 	}
     }
   

@@ -176,13 +176,13 @@ for useStrips in [ True, False ]:
 ############################################################ 
 # produce  L1 HPS PF DiTau objects 
 ############################################################ 
-
-#process.load("L1Trigger.Phase2L1Taus.L1HPSPFDiTauProducer_cff")
-#process.L1HPSPFDiTauProducer.srcL1HPSPFTaus = cms.InputTag("L1HPSPFTauProducerWithStripsWithoutPreselectionPF")
-#process.L1HPSPFDiTauProducer.deltaZ = cms.double(0.4)
-#process.L1HPSPFDiTauProducer.debug = cms.untracked.bool(False)
-#process.productionSequence += process.L1HPSPFDiTauProducer
-
+'''
+process.load("L1Trigger.Phase2L1Taus.L1HPSPFDiTauProducer_cff")
+process.L1HPSPFDiTauProducer.srcL1HPSPFTaus = cms.InputTag("L1HPSPFTauProducerWithStripsWithoutPreselectionPF")
+process.L1HPSPFDiTauProducer.max_dz = cms.double(0.4)
+process.L1HPSPFDiTauProducer.debug = cms.untracked.bool(True)
+process.productionSequence += process.L1HPSPFDiTauProducer
+'''
 from L1Trigger.Phase2L1Taus.L1HPSPFDiTauProducer_cff import L1HPSPFDiTauProducer
 for useStrips in [ True, False ]:
     for applyPreselection in [ True, False ]:

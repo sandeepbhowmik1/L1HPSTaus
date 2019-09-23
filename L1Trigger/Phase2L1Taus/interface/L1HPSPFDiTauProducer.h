@@ -28,7 +28,7 @@ class L1HPSPFDiTauProducer : public edm::EDProducer
   edm::InputTag srcL1HPSPFTaus_;
   edm::EDGetTokenT<l1t::L1HPSPFTauCollection>  tokenL1HPSPFTaus_;
   
-  double deltaZ_;
+  float max_dz_;
   
   bool debug_;
 };
