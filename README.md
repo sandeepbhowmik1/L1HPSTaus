@@ -90,6 +90,14 @@ cp fileToCopy/L1Trigger/Phase2L1Taus/python/L1HPSPFTauProducerPF_cff.py $CMSSW_B
 cp fileToCopy/L1Trigger/Phase2L1Taus/test/produceL1HPSPFTaus_cfg.py $CMSSW_BASE/src/L1Trigger/Phase2L1Taus/test/
 
 
+cp fileToCopy/L1Trigger/Phase2L1Taus/interface/L1HPSPFDiTauProducer.h $CMSSW_BASE/src/L1Trigger/Phase2L1Taus/interface/
+
+cp fileToCopy/L1Trigger/Phase2L1Taus/plugins/L1HPSPFDiTauProducer.cc $CMSSW_BASE/src/L1Trigger/Phase2L1Taus/plugins/
+
+cp fileToCopy/L1Trigger/Phase2L1Taus/python/L1HPSPFDiTauProducer_cff.py $CMSSW_BASE/src/L1Trigger/Phase2L1Taus/python/
+
+cp fileToCopy/L1Trigger/Phase2L1Taus/test/produceL1HPSPFDiTaus_cfg.py $CMSSW_BASE/src/L1Trigger/Phase2L1Taus/test/
+
 rm -rf fileToCopy
 
 rm $CMSSW_BASE/src/L1Trigger/Phase2L1Taus/src/BuildFile.xml
